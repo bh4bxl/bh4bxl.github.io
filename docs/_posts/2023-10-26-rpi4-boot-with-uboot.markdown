@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 在 Raspberry PI 4 上用 U-Boot 启动
 date: 2023-10-26
 tags: [RaspberryPI4, U-Boot]
@@ -74,3 +75,4 @@ $ mkimage -T script -A arm64 -C none -a 0x2400000 -e 0x2400000 -d boot.source bo
 然后把``boot.scr``文件复制到 RPI4 系统盘的 boot 分区的根目录下。
 
 这样就可以启动 Linux 系统了。
+
