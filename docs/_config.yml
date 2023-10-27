@@ -21,9 +21,8 @@
 title: BXL's BLOG
 email: bh4bxl@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  This site recorded what I did or studied, include embedded development,
+  virtualization, algorithm study, code learning, deep learning, etc.
 baseurl: "" # the subpath of your site, e.g. /blog
 domain: bh4bxl.github.io
 url: "https://bh4bxl.github.io" # the base hostname & protocol for your site, e.g. http://example.com
