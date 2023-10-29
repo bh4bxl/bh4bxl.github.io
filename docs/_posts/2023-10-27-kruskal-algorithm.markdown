@@ -6,7 +6,7 @@ tag: [algoritm]
 categories: algoritm
 ---
 
-Kruskal 算法是用来寻找最小树的算法，是由美国数学家 Joseph Bernard Kruskal, Jr. 在 1956 年发表的。
+Kruskal 算法是用来寻找最小树的算法，是由美国数学家 [Joseph Bernard Kruskal, Jr.](https://en.wikipedia.org/wiki/Joseph_Kruskal) 在 1956 年发表的。
 
 ## 步骤
 
@@ -35,7 +35,7 @@ Kruskal 算法是用来寻找最小树的算法，是由美国数学家 Joseph B
 
 ### leetcode 1584
 
-[leetcode 1584](https://leetcode.com/problems/min-cost-to-connect-all-points/) 可以使用寻找最小树的方法来解
+[leetcode 1584 Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/) 可以使用寻找最小树的方法来解
 
 ```c++
 class Solution {
