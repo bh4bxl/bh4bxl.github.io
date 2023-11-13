@@ -7,7 +7,7 @@ categories: web
 ---
 ## 定义
 
-WebAssembly或称wasm是一个低级编程语言。WebAssembly是便携式的抽象语法树[2]，被设计来提供比JavaScript更快速的编译及执行[3]。WebAssembly将让开发者能运用自己熟悉的编程语言（最初以C/C++作为实现目标）编译，再藉虚拟机引擎在浏览器内执行[1]。
+WebAssembly或称wasm是一个低级编程语言。WebAssembly是便携式的抽象语法树，被设计来提供比JavaScript更快速的编译及执行。WebAssembly将让开发者能运用自己熟悉的编程语言（最初以C/C++作为实现目标）编译，再藉虚拟机引擎在浏览器内执行[1]。
 
 在 2019 年 12 月 5 日，W3C制定《WebAssembly核心规范》，WebAssembly 正式被认证为 Web 的标准之一[1]。
 
