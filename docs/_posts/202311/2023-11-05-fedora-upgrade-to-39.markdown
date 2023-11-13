@@ -3,7 +3,7 @@ layout: post
 title: 升级Fedora到39
 date: 2023-11-05
 tag: [fedora]
-categories: fedora
+categories: [Linux distribution]
 ---
 
 Fedora 39已经发布了有一个多星期了，今天尝试把系统升级到最新的39。

@@ -2,8 +2,8 @@
 layout: post
 title: Kruskal 算法
 date: 2023-10-27
-tag: [algoritm]
-categories: algoritm
+tag: [algorithm]
+categories: Algorithm
 ---
 
 Kruskal 算法是用来寻找最小树的算法，是由美国数学家 [Joseph Bernard Kruskal, Jr.](https://en.wikipedia.org/wiki/Joseph_Kruskal) 在 1956 年发表的。

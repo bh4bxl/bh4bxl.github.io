@@ -3,7 +3,7 @@ layout: post
 title: 在Linux上运行的Stream正确显示中文
 date: 2023-10-31
 tag: [steam, chinese]
-categories: steam
+categories: Game
 ---
 
 在Fedora Linux上安装了Steam之后，运行Steam，然后设置成中文。重新启动Steam之后，发现菜单和里面的内容，应该显示中文的地方都显示的是一个个方块。

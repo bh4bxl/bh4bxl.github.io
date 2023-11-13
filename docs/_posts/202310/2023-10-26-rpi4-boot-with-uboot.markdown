@@ -3,7 +3,7 @@ layout: post
 title: 在 Raspberry PI 4 上用 U-Boot 启动
 date: 2023-10-26
 tags: [RaspberryPI4, U-Boot]
-categories: RaspberryPI4 U-Boot
+categories: [Raspberry PI, U-Boot]
 ---
 
 在 RPI4 上用 U-Boot 启动，可以方便的更改启动 kernel 。

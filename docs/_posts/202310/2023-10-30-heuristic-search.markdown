@@ -3,7 +3,7 @@ layout: post
 title: 启发式搜索
 date: 2023-10-30
 tag: [algorithm]
-categories: algorithm
+categories: Algorithm
 ---
 
 启发式搜索是在普通搜索算法的基础上引入启发函数的搜索算法。

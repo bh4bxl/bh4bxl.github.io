@@ -2,8 +2,8 @@
 layout: post
 title: Ring Buffer
 date: 2023-11-12
-tag: [algoritm]
-categories: algoritm
+tag: [algorithm]
+categories: Algorithm
 ---
 
 Ring Buffer也叫Circular Buffer、Circular Queue或者Cyclic Buffer，是一个固定大小、首尾相连的数据结构。多用于缓存数据流。

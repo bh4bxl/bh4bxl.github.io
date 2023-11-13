@@ -3,7 +3,7 @@ layout: post
 title: 什么是WebAssembly
 date: 2023-11-07
 tags: [web]
-categories: web
+categories: Front-end
 ---
 ## 定义
 

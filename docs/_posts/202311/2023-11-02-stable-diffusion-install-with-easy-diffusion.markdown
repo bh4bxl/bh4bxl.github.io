@@ -3,7 +3,7 @@ layout: post
 title: 试用Stable Diffusion绘图
 date: 2023-11-02
 tags: [ai]
-categories: ai
+categories: AI
 ---
 
 最近AI的各种应用非常火爆，看到了不少用AI制作的能以假乱真的各种图片，甚至“蛤蟆丝”都在用AI作图以赢得世界的同情。
