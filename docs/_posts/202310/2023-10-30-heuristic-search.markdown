@@ -29,7 +29,7 @@ $$
 代码如下（官方代码稍作修改）：
 
 ```c++
-lass Solution {
+class Solution {
 public:
     int minimumEffortPath(vector<vector<int>>& heights) {
         int m = heights.size();
