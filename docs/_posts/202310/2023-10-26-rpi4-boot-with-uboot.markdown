@@ -58,13 +58,13 @@ arm_64bit=1
 
 ```
 setenv kernel_comp_addr_r 0x0A000000
-setenv kernel_comp_size 8726865
+setenv kernel_comp_size 0x1000000
 fdt addr ${fdt_addr} && fdt get value bootargs /chosen bootargs
 fatload usb 0:1 ${kernel_addr_r} kernel8.img
 booti ${kernel_addr_r} - ${fdt_addr}
 ```
 
-其中``kernel_comp_size``是``kernel8.img``文件的大小。
+其中``kernel_comp_size``要大于``kernel8.img``文件的大小。
 
 使用``mkimage``生成``boot.scr``：
 
