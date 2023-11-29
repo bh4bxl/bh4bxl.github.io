@@ -224,10 +224,23 @@ Mem:           3.8Gi       207Mi       3.4Gi       1.3Mi       344Mi       3.6Gi
 Swap:           99Mi          0B        99Mi
 ```
 
+### 添加XEN相关Modules
+
+创建新文件``/usr/lib/modules-load.d/xen.conf``：
+
+```
+xen-evtchn
+xen-gntdev
+xen-gntalloc
+xen-blkback
+xen-netback
+```
+
 ## 问题
 
 - BT/WiFi：蓝牙不能使用，WiFi暂时没有发现问题
 - Graphics：图形界面不能使用
+- ``reboot``：命令不能重启
 
 ## 参考
 
