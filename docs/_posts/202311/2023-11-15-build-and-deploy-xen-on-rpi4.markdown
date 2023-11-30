@@ -21,7 +21,7 @@ $ gh repo clone xen-project/xen
 ...
 $ cd xen
 
-$ checkout RELEASE-4.17.2
+$ git checkout RELEASE-4.17.2
 ```
 
 ### 编译
@@ -191,7 +191,7 @@ U-Boot> source 0xC00000
 
 查看CPU信息（Dom0分配了2个vCPU）：
 
-```
+```bash
 $ cat /proc/cpuinfo
 processor	: 0
 BogoMIPS	: 108.00
@@ -217,7 +217,7 @@ Model		: Raspberry Pi 4 Model B
 
 内存信息（Dom0分配了4GB的内存）：
 
-```
+```bash
 $ free -h
                total        used        free      shared  buff/cache   available
 Mem:           3.8Gi       207Mi       3.4Gi       1.3Mi       344Mi       3.6Gi
@@ -234,6 +234,57 @@ xen-gntdev
 xen-gntalloc
 xen-blkback
 xen-netback
+```
+
+## 编译安装``xen-tools``
+
+### 编译
+
+为了方便设置编译环境，直接在Raspberry PI 4的板子上编译。
+
+编译前需要安装的依赖包：``uuid-dev``、``libglib2.0-dev``、``libpixman-1-dev``、``libyajl-dev``、``libfdt-dev``、``libsystemd-dev``、``ncat``、``ninja-build``等。
+
+下载XEN的Code，并配置：
+
+```bash
+$ ./configure --enable-systemd --disable-xen --enable-tools --disable-docs --disable-stubdom --disable-golang --with-xenstored=xenstored
+```
+
+编译：
+
+```bash
+$ make dist-tools -j4
+```
+
+### 安装
+
+```bash
+$ sudo make install-tools
+$ sudo ldconfig
+```
+
+Enable服务：
+
+```bash
+$ sudo systemctl enable xen-qemu-dom0-disk-backend.service
+$ sudo systemctl enable xen-init-dom0.service
+$ sudo systemctl enable xenconsoled.service
+$ sudo systemctl enable xendomains.service
+$ sudo systemctl enable xen-watchdog.service
+```
+
+### 运行
+
+重启后运行``xl``测试一下：
+
+```bash
+$ sudo xl list
+Name                                        ID   Mem VCPUs	State	Time(s)
+Domain-0                                     0  4096     2     r-----      72.4
+
+$ sudo xl cpupool-list
+Name               CPUs   Sched     Active   Domain count
+Pool-0               4      null       y          1
 ```
 
 ## 问题
