@@ -76,3 +76,47 @@ $ mkimage -T script -A arm64 -C none -a 0x2400000 -e 0x2400000 -d boot.source bo
 
 这样就可以启动 Linux 系统了。
 
+## 使用TFTP
+
+### 在 Fedora 上启动 tftp server
+
+安装相关软件：
+
+```bash
+sudo dnf install tftp-server tftp
+```
+
+Enable tftp server:
+
+```bash
+sudo systemctl start tftp.socket
+sudo systemctl enable tftp.socket
+```
+
+配置 tftp server 目录属性：
+
+```bash
+chmod 777 /var/lib/tftpboot
+```
+
+配置防火墙：
+
+```bash
+firewall-cmd --add-service=tftp --perm
+firewall-cmd --reload
+```
+
+### U-Boot 中使用 tftp
+
+配置 server ip 和 本机 ip：
+
+```
+setenv serverip 192.168.1.123
+setenv ipaddr 192.168.1.124
+```
+
+加载 Kernel Image：
+
+```
+tftp ${kernel_addr_r} kernel8.img
+```
