@@ -99,7 +99,40 @@ $ ~/.config/emacs/bin/doom sync
 
 暂时还没发现其他问题，等有了问题再来记录吧。
 
+## Fedora in WSL
+
+由于WSL无法执行 `system-upgrade reboot`，所以在执行完`download`命令前，要设置一个环境变量：
+
+```bash
+export DNF_SYSTEM_UPGRADE_NO_REBOOT=1
+```
+
+然后：
+
+```bash
+sudo -E dnf system-upgrade reboot
+```
+
+可以看到`Reboot turned off, not rebooting.`
+
+接下来进行`upgrade`：
+
+```bash
+sudo -E dnf system-upgrade upgrade
+```
+
+最后通过`wsl`命令重启 Fedora：
+
+```
+wsl -t fedora
+```
+
+## 后续
+
+Fedora 40, 41都可以用这个方法升级。
+
 ## 参考
 
 - [1][Upgrading Fedora Using DNF System Plugin](https://docs.fedoraproject.org/en-US/quick-docs/upgrading-fedora-offline/)
+- [2][How to Upgrade to Fedora 37 In Place on Windows Subsystem for Linux (WSL)](https://dev.to/bowmanjd/how-to-upgrade-fedora-in-place-on-windows-subsystem-for-linux-wsl-oh3)
 
