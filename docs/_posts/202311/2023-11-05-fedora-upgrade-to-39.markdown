@@ -101,7 +101,7 @@ $ ~/.config/emacs/bin/doom sync
 
 ## Fedora in WSL
 
-由于WSL无法执行 `system-upgrade reboot`，所以在执行完`download`命令前，要设置一个环境变量：
+由于WSL无法执行 `system-upgrade reboot`，所以在执行`download`命令前，要设置一个环境变量：
 
 ```bash
 export DNF_SYSTEM_UPGRADE_NO_REBOOT=1
