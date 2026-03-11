@@ -32,7 +32,7 @@ It is very easy to install OrbStack using `brew`:
 brew install orbstack
 ```
 
-### Another Useful Tools
+### Other Useful Tools
 
 - **asitop**: Perf monitoring CLI tool for Apple Silicon
 - **stats**: A macOS system monitor in menu bar
