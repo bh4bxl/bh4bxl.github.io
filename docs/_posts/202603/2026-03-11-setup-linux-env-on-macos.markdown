@@ -3,7 +3,7 @@ layout: post
 title: Setting Up a Linux Development Environment on macOS (OrbStack + Fedora)
 date: 2025-08-21
 tag: [fedora, macos, linux kernel]
-categories: Algorithm
+categories: Linux distribution
 ---
 
 ## Background
