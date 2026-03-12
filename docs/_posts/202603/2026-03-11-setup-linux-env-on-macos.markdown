@@ -141,3 +141,35 @@ sudo chown -R bh4bxl:bh4bxl /mnt/yocto
 ```
 
 Now the build environment on macOS for Yocto is ready.
+
+### Reclaim Disk Space
+
+After deleting many files inside the loop-mounted filesystem, the actual size of the sparse image file may not shrink automatically.
+
+To release unused space, run the following command inside the mounted filesystem:
+
+```bash
+sudo fstrim -v /mnt/yocto
+```
+
+Example output:
+
+```
+/mnt/yocto: 52.9 GiB (56800538624 bytes) trimmed
+```
+
+After trimming, the host filesystem can reclaim the unused blocks in the sparse image.
+
+You can verify the actual disk usage with `du`:
+
+```bash
+# Before
+du -ch yocto_dynamic.img
+99G    yocto_dynamic.img
+99G    total
+
+# After
+du -ch yocto_dynamic.img
+50G    yocto_dynamic.img
+50G    total
+```
