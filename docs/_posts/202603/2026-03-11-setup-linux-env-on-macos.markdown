@@ -137,6 +137,7 @@ Then format it and mount it inside Fedora.
 sudo mkfs.ext4 /dev/loop0
 sudo mkdir /mnt/yocto
 sudo mount /dev/loop0 /mnt/yocto
+sudo chown -R bh4bxl:bh4bxl /mnt/yocto
 ```
 
 Now the build environment on macOS for Yocto is ready.
