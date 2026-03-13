@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Building Yocto for Raspberry Pi 4 on Fedora (OrbStack VM)
-date: 2026-03-11
+date: 2026-03-12
 tag: [yocto, raspberrypi]
 categories: [Yocto]
 ---
@@ -58,6 +58,10 @@ INHERIT += "rm_work"
 LICENSE_FLAGS_ACCEPTED = "synaptics-killswitch"
 
 IMAGE_FSTYPES = "wic.bz2"
+
+ENABLE_UART = "1"
+
+CMDLINE:append = " video=HDMI-A-1:1920x1080@60"
 ```
 
 - **MACHINE**: Target machine configuration.
@@ -65,6 +69,8 @@ IMAGE_FSTYPES = "wic.bz2"
 - **PARALLEL_MAKE**: Number of threads used by `make`.
 - **rm_work**: Removes temporary build files after packages are built to reduce disk usage.
 - **IMAGE_FSTYPES**: Specifies the image format to generate.
+- **ENABLE_UART = "1"**: Enables the UART interface on Raspberry Pi. This is useful for accessing the serial console during boot.
+- **CMDLINE:append**: Appends additional parameters to the Linux kernel command line. `video=HDMI-A-1:1920x1080@60` forces the HDMI output to use a 1920×1080 resolution at 60 Hz
 
 ## Add Required Layers
 
