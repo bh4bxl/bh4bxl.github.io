@@ -139,3 +139,97 @@ The directory contains several output files, for example:
 - **`bcm2711-rpi-4-b.dtb`**: Device Tree
 
 The `.wic.bz2` image can be written directly to an SD card for booting on a Raspberry Pi 4.
+
+## Verify the Image
+
+### Running the Image on Raspberry Pi 4
+
+After the build finishes, the generated image can be written directly to an SD card and booted on a Raspberry Pi 4.
+
+Decompress the image, and write it to the SD card:
+
+```bash
+bunzip2 core-image-minimal-raspberrypi4-64.rootfs-*.wic.bz2
+sudo dd if=core-image-minimal-raspberrypi4-64.rootfs-.wic of=/dev/sdX bs=4M status=progress
+sync
+```
+
+Insert the SD card into the Raspberry Pi 4 and power it on.
+
+Default login:
+
+```
+user: root
+password: (empty)
+```
+
+### Running the Image with QEMU
+
+In QEMU, we can choose the `raspi4b` machine.
+
+First, resize the image to 256M
+
+```bash
+qemu-img resize core-image-minimal-raspberrypi4-64.rootfs-*.wic 256M
+```
+
+Then boot the system with QEMU:
+
+```bash
+qemu-system-aarch64 \
+    -M raspi4b -m 2G -smp 4 \
+    -kernel Image -dtb bcm2711-rpi-4-b.dtb \
+    -append "earlycon=pl011,0xfe201000 console=tty1 console=ttyAMA1,115200 root=/dev/mmcblk1p2 rootwait rw dwc_otg.fiq_fsm_enable=0 dwc_otg.lpm_enable=0" \
+    -drive file=core-image-minimal-raspberrypi4-64.rootfs-*.wic,format=raw,if=sd \
+    -serial stdio -monitor telnet:127.0.0.1:5555,server,nowait
+```
+
+After the system boots, the display appears in a new window.
+
+However, because the `raspi4b` machine in QEMU does not provide a PCI bus, the USB controller is not available. As a result, USB devices such as keyboards cannot be used, and it is not possible to input commands on `tty1`.
+
+To control the QEMU instance, open another terminal and connect to the monitor interface:
+
+```bash
+telnet localhost 5555
+```
+
+- **`q`**: exit the QEMU instance
+- **`info cpus`**: show CPU information
+- **`info registers`**: display CPU register values (useful to check whether the system is still running)
+- **`info pci`**: show PCI devices (empty for `raspi4b`)
+
+The image boots successfully on real Raspberry Pi 4 hardware after being written to an SD card.
+
+On QEMU, the `raspi4b` machine is sufficient for early boot validation. The kernel starts correctly, the root filesystem is mounted, and init begins to run. However, in my setup I was not able to obtain an interactive login prompt on `-serial stdio`, even after enabling the serial console and verifying that a getty entry for `ttyAMA1` was generated in the image.
+
+In practice, this means QEMU is still useful for early boot experiments, while real hardware remains the most reliable way to validate the full system. For interactive userspace debugging, using QEMU with the generic `virt` machine may be a more practical option.
+
+### Inspect the Root Filesystem
+
+Mount the image file:
+
+```bash
+sudo losetup --show -Pf /path/to/core-image-minimal-raspberrypi4-64.rootfs-*.wic
+```
+
+The `--show -Pf` option automatically creates loop devices for each partition.
+
+
+Check the loop device associated with the image, and mount the root filesystem:
+
+```bash
+losetup -a
+sudo mount /dev/loopXp2 /mnt/rootfs
+```
+
+After mounting, the root filesystem can be inspected under `/mnt/rootfs`.
+
+Unmount the filesystem when finished:
+
+```bash
+sudo umount /mnt/rootfs
+sudo losetup -d /dev/loopX
+```
+
+The root filesystem is usually located in the second partition of the .wic image.
