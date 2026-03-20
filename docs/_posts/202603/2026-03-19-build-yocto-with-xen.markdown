@@ -206,4 +206,4 @@ Xen was successfully initialized on Raspberry Pi 4, and the Dom0 Linux kernel bo
 
 Running Xen on Raspberry Pi 4 with Yocto is feasible, but requires careful configuration of layers, boot flow, and device tree.
 
-Running Xen on Raspberry Pi 4 with Yocto is feasible, but requires careful configuration of layers, boot flow, and device tree.
+This setup provides a useful platform for experimenting with ARM virtualization in embedded systems.
