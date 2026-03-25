@@ -123,11 +123,11 @@ int ringbuffer_read(ringbuffer_t *rb, ...) {
 ```c
 #define ringbuffer_is_empty(rb) \
     ((rb->read_index == rb->write_index) && \
-     (rb->read_mirror == rb->write->write_index)
+     (rb->read_mirror == rb->write_mirror)
 
 #define ringbuffer_is_full(rb) \
     ((rb->read_index == rb->write_index) && \
-     (rb->read_mirror != rb->write->write_index)
+     (rb->read_mirror != rb->write_mirror)
 ```
 
 #### 镜像指示扩展
