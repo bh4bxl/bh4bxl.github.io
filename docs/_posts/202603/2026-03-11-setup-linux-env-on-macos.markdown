@@ -173,3 +173,86 @@ du -ch yocto_dynamic.img
 50G    yocto_dynamic.img
 50G    total
 ```
+
+## Appendix: Helper Script for Mounting Yocto Filesystem Images
+
+This script makes it easy to mount Yocto images.
+
+The script also checks whether the image is already attached or mounted, making it safe to run multiple times.
+
+```bash
+# !/bin/sh
+
+set -e
+
+IMAGE_PATH=/mnt/mac/Volumes/Utils/bh4bxl/yocto_dynamic.img
+MOUNT_PATH=/mnt/yocto
+
+usage()
+{
+    echo "Usage:"
+    echo "  $0          # mount"
+    echo "  $0 -u       # umount"
+    exit 1
+}
+
+# Find loop device associated with the image
+find_loop_dev()
+{
+    losetup -j "$IMAGE_PATH" | cut -d: -f1
+}
+
+do_mount ()
+{
+    if [[ ! -f "$IMAGE_PATH" ]]; then
+        echo "[ERROR] Image not found: $IMAGE_PATH"
+        exit 1
+    fi
+
+    mkdir -p "$MOUNT_PATH"
+
+    LOOP_DEV=$(find_loop_dev)
+
+    if [[ -n "$LOOP_DEV" ]]; then
+        echo "[INFO] Already attached to $LOOP_DEV"
+    else
+        LOOP_DEV=$(sudo losetup --show -f "$IMAGE_PATH")
+        echo "[INFO] Attached $IMAGE_PATH to $LOOP_DEV"
+    fi
+
+    if mount | grep -q "$MOUNT_PATH"; then
+        echo "[INFO] Already mounted on $MOUNT_PATH"
+    else
+        sudo mount "$LOOP_DEV" "$MOUNT_PATH"
+        echo "[INFO] Mounted $LOOP_DEV -> $MOUNT_PATH"
+    fi
+}
+
+do_unmount ()
+{
+    LOOP_DEV=$(find_loop_dev)
+
+    if mount | grep -q "$MOUNT_PATH"; then
+        sudo umount "$MOUNT_PATH"
+        echo "[INFO] Unmounted $MOUNT_PATH"
+    else
+        echo "[INFO] $MOUNT_PATH not mounted"
+    fi
+
+    if [[ -n "$LOOP_DEV" ]]; then
+        sudo losetup -d "$LOOP_DEV"
+        echo "[INFO] Detached $LOOP_DEV"
+    else
+        echo "[INFO] No loop device found for $IMAGE_PATH"
+    fi
+}
+
+# main
+if [[ "$1" == "-u" ]]; then
+    do_unmount
+elif [[ $# -eq 0 ]]; then
+    do_mount
+else
+    usage
+fi
+```
