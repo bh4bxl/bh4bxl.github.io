@@ -172,8 +172,8 @@ Often not worth it unless:
 
 Very common in driver development:
 
-- interrupt handler -> producer
-- thread -> consumer
+- interrupt handler → producer
+- thread → consumer
 
 ### Problem
 
