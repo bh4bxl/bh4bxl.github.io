@@ -90,7 +90,7 @@ typedef struct _ringbuffer {
     uint8_t read_mirror;
     uint8_t write_mirror;
     uint16_t read_index;
-    uint16_t read_index;
+    uint16_t write_index;
 } ringbuffer_t;
 ```
 
