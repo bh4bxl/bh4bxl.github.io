@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Thread Safety in Ring Buffer: From Lock-Free to Multi-Threaded Designs
+title: Thread Safety in Ring Buffer
 date: 2026-03-30
 tag: [algorithm]
 categories: Algorithm
