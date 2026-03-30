@@ -91,13 +91,17 @@ int rb_read(rb_t *rb, uint8_t *data)
 On modern CPUs (especially ARM):
 
 ```
-write data => update pointer
+write data
+⬇
+update pointer
 ```
 
 may be reordered as:
 
 ```
-update pointer => write data
+update pointer
+⬇
+write data
 ```
 
 This causes the consumer to read invalid data.
