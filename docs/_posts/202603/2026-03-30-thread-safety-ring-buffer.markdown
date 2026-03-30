@@ -92,7 +92,7 @@ On modern CPUs (especially ARM):
 
 ```
 write data
-⬇
+    ↓
 update pointer
 ```
 
@@ -100,7 +100,7 @@ may be reordered as:
 
 ```
 update pointer
-⬇
+    ↓
 write data
 ```
 
