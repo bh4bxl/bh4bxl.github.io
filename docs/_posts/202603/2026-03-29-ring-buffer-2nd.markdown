@@ -186,7 +186,7 @@ typedef struct _ring_buffer {
 
 This is a **high-performance design** used in systems like the Linux kernel.
 
-## Reference: Linux Kernel kfifo
+### Reference: Linux Kernel kfifo
 
 The Linux kernel provides a ring buffer implementation called `kfifo`:
 
@@ -213,16 +213,16 @@ When:
 
 This avoids mirror bits entirely.
 
-## Real-World Usage
+### Real-World Usage
 
-### Audio Systems (ALSA / DSP)
+#### Audio Systems (ALSA / DSP)
 
 - PCM buffer is essentially a ring buffer
 - Common issues:
   - **Underrun** => consumer too fast
   - **Overrun** => producer too fast
 
-### Virtualization (Virtio)
+#### Virtualization (Virtio)
 
 - Virtqueue is based on ring buffer
 - Shared memory between frontend/backend (FE/BE)
@@ -230,14 +230,14 @@ This avoids mirror bits entirely.
   - Reduce VM exits
   - Improve throughput
 
-### Device Drivers (USB / UART)
+#### Device Drivers (USB / UART)
 
 - Interrupt handler => writes data into ring buffer
 - User space => reads data
 
-## Common Pitfalls
+### Common Pitfalls
 
-### Off-by-one errors
+#### Off-by-one errors
 
 ```c
 (write + 1) % size
@@ -245,14 +245,14 @@ This avoids mirror bits entirely.
 
 Easy to get wrong.
 
-### Concurrency issues
+#### Concurrency issues
 
 - Producer / consumer race conditions
 - Missing synchronization
 
 In SPSC (Single Producer Single Consumer), lock-free is possible.
 
-### Cache coherency (important in real systems)
+#### Cache coherency (important in real systems)
 
 In DMA or shared memory scenarios:
 
@@ -265,15 +265,15 @@ Especially critical in:
 - Hypervisor
 - Embedded systems
 
-## Summary
+### Summary
 
-| **Method** | **Pros** | *Cons* |
+| **Method** | **Pros** | **Cons** |
 |------------|----------|--------|
 | Reserve 1 slot | Simple | Wastes space |
 | Mirror bit | Full utilization | More complex |
 | Power-of-two + mask | Highest performance | Requires fixed size |
 
-## Minimal Example
+### Minimal Example
 
 ```c
 int ringbuffer_write(ringbuffer_t *rb, uint8_t data)
