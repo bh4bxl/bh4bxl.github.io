@@ -137,8 +137,8 @@ When multiple threads access the buffer, Lock-free SPSC no longer works.
 ```c
 pthread_mutex_lock(&lock);
 
-write data
-update pointer
+// write data
+// update pointer
 
 pthread_mutex_unlock(&lock);
 ```
