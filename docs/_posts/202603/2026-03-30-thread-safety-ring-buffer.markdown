@@ -188,7 +188,7 @@ Interrupt can occur:
 
 ```c
 disable_interrupts();
-write data
+// write data
 enable_interrupts();
 ```
 
@@ -196,7 +196,7 @@ enable_interrupts();
 
 ```c
 spin_lock_irqsave(&lock, flags);
-...
+// ...
 spin_unlock_irqrestore(&lock, flags);
 ```
 
