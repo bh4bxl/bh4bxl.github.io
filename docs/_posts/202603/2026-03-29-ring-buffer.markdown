@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ring Buffer
+title: Ring Buffer (2nd)
 date: 2026-03-29
 tag: [algorithm]
 categories: Algorithm
