@@ -99,14 +99,30 @@ hello_world/
 ### Build
 
 ```bash
-west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/pico2w/hello_world
+west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/hello_world
 ```
 
 or:
 
 ```bash
-west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/pico2w/hello_world
+west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/hello_world
 ```
+
+For STM32H7S78-DK, both internal-flash and external-XIP builds are available.
+
+Internal flash build:
+
+```bash
+west build -b stm32h7s78_dk -d build_stm32h7s ~/projects/zephyr/hello_world
+```
+
+External XIP build:
+
+```bash
+west build -b stm32h7s78_dk/stm32h7s7xx/ext_flash_app --sysbuild -d build_stm32h7s_xip ~/projects/zephyr/hello_world
+```
+
+The external XIP configuration is intended for running the application from OSPI flash, with MCUboot located in internal flash.
 
 ### Workspace and Multi-Board Builds
 
@@ -115,8 +131,9 @@ Zephyr uses a single workspace to support multiple MCU platforms. Unlike some bu
 In practice, one workspace (e.g., `~/zephyrproject`) can be used to build applications for different targets:
 
 ```bash
-west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/pico2w/hello_world
-west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/pico2w/hello_world
+west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk/stm32h7s7xx/ext_flash_app --sysbuild -d build_stm32h7s_xip ~/projects/zephyr/hello_world
 ```
 
 Each target requires its own build directory, since the build output is tightly coupled with the selected board, including devicetree, configuration, and toolchain settings.
@@ -176,7 +193,7 @@ probe-rs download --chip <chip_name> build_stm32/zephyr/zephyr.elf
 ```
 
 > For debugging, the current workflow typically relies on IDE integration (e.g., VSCode with probe-rs DAP support) or GDB server mode, rather than using the standalone `probe-rs debug` command directly.
-
+>
 > This reflects a shift toward a more integrated debugging experience, where `probe-rs` acts as the debug backend while the frontend is provided by IDEs or standard debugging tools.
 
 This approach is often more flexible, especially when the board does not officially support a specific runner in Zephyr.
@@ -236,6 +253,7 @@ spi_transceive(dev, ...);
 ### Key takeaway
 
 > Zephyr does not use file-based abstraction.
+>
 > It uses subsystem-specific APIs (SPI, I2C, GPIO).
 
 ---
