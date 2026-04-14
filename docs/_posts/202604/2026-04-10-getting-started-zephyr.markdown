@@ -98,14 +98,10 @@ hello_world/
 
 ### Build
 
+For Raspberry Pico 2:
+
 ```bash
 west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/hello_world
-```
-
-or:
-
-```bash
-west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/hello_world
 ```
 
 For STM32H7S78-DK, both internal-flash and external-XIP builds are available.
