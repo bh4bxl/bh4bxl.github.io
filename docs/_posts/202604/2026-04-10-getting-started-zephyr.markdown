@@ -109,7 +109,7 @@ For STM32H7S78-DK, both internal-flash and external-XIP builds are available.
 Internal flash build:
 
 ```bash
-west build -b stm32h7s78_dk -d build_stm32h7s ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/hello_world
 ```
 
 External XIP build:
