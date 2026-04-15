@@ -151,7 +151,7 @@ The firmware to be flashed is always taken from the selected build directory:
 
 ```bash
 west flash -d ~/projects/zephyr/hello_world/build_pico2 --runner probe-rs
-west flash -d ~/projects/zephyr/hello_world/build_stm32 --runner openocd
+west flash -d ~/projects/zephyr/hello_world/build_stm32h7s78_dk --runner openocd
 ```
 
 The runner only defines how the firmware is programmed (e.g., probe-rs, OpenOCD, J-Link), while the actual binary comes from the corresponding build directory.
