@@ -101,7 +101,7 @@ hello_world/
 For Raspberry Pico 2:
 
 ```bash
-west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/hello_world
+west build -b rpi_pico2/rp2350a/m33 -d ~/projects/zephyr/hello_world/build_pico2 ~/projects/zephyr/hello_world
 ```
 
 For STM32H7S78-DK, both internal-flash and external-XIP builds are available.
@@ -109,13 +109,13 @@ For STM32H7S78-DK, both internal-flash and external-XIP builds are available.
 Internal flash build:
 
 ```bash
-west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk -d ~/projects/zephyr/hello_world/build_stm32h7s78_dk ~/projects/zephyr/hello_world
 ```
 
 External XIP build:
 
 ```bash
-west build -b stm32h7s78_dk/stm32h7s7xx/ext_flash_app --sysbuild -d build_stm32h7s_xip ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk/stm32h7s7xx/ext_flash_app --sysbuild -d ~/projects/zephyr/hello_world/build_stm32h7s_xip ~/projects/zephyr/hello_world
 ```
 
 The external XIP configuration is intended for running the application from OSPI flash, with MCUboot located in internal flash.
@@ -127,9 +127,9 @@ Zephyr uses a single workspace to support multiple MCU platforms. Unlike some bu
 In practice, one workspace (e.g., `~/zephyrproject`) can be used to build applications for different targets:
 
 ```bash
-west build -b rpi_pico2/rp2350a/m33 -d build_pico2 ~/projects/zephyr/hello_world
-west build -b stm32h7s78_dk -d build_stm32h7s78_dk ~/projects/zephyr/hello_world
-west build -b stm32h7s78_dk/stm32h7s7xx/ext_flash_app --sysbuild -d build_stm32h7s_xip ~/projects/zephyr/hello_world
+west build -b rpi_pico2/rp2350a/m33 -d ~/projects/zephyr/hello_world/build_pico2 ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk -d ~/projects/zephyr/hello_world/build_stm32h7s78_dk ~/projects/zephyr/hello_world
+west build -b stm32h7s78_dk/stm32h7s7xx/ext_flash_app --sysbuild -d ~/projects/zephyr/hello_world/build_stm32h7s_xip ~/projects/zephyr/hello_world
 ```
 
 Each target requires its own build directory, since the build output is tightly coupled with the selected board, including devicetree, configuration, and toolchain settings.
@@ -150,8 +150,8 @@ After building the application, Zephyr provides a unified interface to flash fir
 The firmware to be flashed is always taken from the selected build directory:
 
 ```bash
-west flash -d build_pico2 --runner probe-rs
-west flash -d build_stm32 --runner openocd
+west flash -d ~/projects/zephyr/hello_world/build_pico2 --runner probe-rs
+west flash -d ~/projects/zephyr/hello_world/build_stm32 --runner openocd
 ```
 
 The runner only defines how the firmware is programmed (e.g., probe-rs, OpenOCD, J-Link), while the actual binary comes from the corresponding build directory.
@@ -159,7 +159,7 @@ The runner only defines how the firmware is programmed (e.g., probe-rs, OpenOCD,
 For some boards, the default runner can be used directly:
 
 ```bash
-west flash -d build_stm32h7s78_dk
+west flash -d ~/projects/zephyr/hello_world/build_stm32h7s78_dk
 ```
 
 However, not all boards support all runners. For example, some STM32 boards may not support `probe-rs` in Zephyr, even though the underlying chip is supported. In such cases, alternative runners such as `openocd` or `stm32cubeprogrammer` should be used.
@@ -177,7 +177,7 @@ In practice, it is recommended to always specify the build directory explicitly 
 Zephyr also provides a unified interface for debugging through `west debug`, similar to the flashing workflow.
 
 ```bash
-west debug -d build_stm32h7s78_dk --runner openocd
+west debug -d ~/projects/zephyr/hello_world/build_stm32h7s78_dk --runner openocd
 ```
 
 The debug runner depends on the board and available tools (e.g., OpenOCD, J-Link). Similar to flashing, the debug session is associated with the selected build directory.
