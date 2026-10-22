@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Getting Started with Zephyr on MCU – A Practical Engineer’s View
+title: Debugging an ARM64 Linux Kernel Panic with Yocto, Kdump, and Crash
 date: 2026-11-22
 tag: [linux, yocto, crash]
 categories: Linux
