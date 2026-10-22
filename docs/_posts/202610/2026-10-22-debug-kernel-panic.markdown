@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Debugging an ARM64 Linux Kernel Panic with Yocto, Kdump, and Crash
-date: 2026-11-22
+date: 2026-10-22
 tag: [linux, yocto, crash]
 categories: Linux kernel
 ---
