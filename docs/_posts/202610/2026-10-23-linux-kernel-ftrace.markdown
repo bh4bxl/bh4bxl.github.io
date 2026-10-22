@@ -3,7 +3,7 @@ layout: post
 title: Tracing Linux Kernel Execution with ftrace on Yocto QEMU ARM64
 date: 2026-10-23
 tag: [linux, yocto, ftrace]
-categories: Linux kernel
+categories: Linux Kernel
 ---
 
 ## 1. Introduction
