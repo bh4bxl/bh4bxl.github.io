@@ -284,7 +284,7 @@ openssl req -x509 -newkey rsa:4096 \
   -subj "/CN=QEMU ARM64 RAUC Development/"
 ```
 
-Then copy the key into Yocto layer:
+Then put the key into Yocto layer:
 
 ```bash
 cp ~/yocto/ab-test/keys/rauc.cert.pem \
